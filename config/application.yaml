@@ -1,0 +1,5 @@
+connection:
+  swaggerAddresses:
+    test1: http://localhost:8081/v3/api-docs
+    test2: http://localhost:8081/v3/api-docs
+  scrapeInterval: 5000
