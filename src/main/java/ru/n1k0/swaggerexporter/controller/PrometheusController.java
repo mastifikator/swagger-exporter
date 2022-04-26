@@ -19,7 +19,7 @@ public class PrometheusController {
     @Autowired
     private PrometheusService prometheusService;
 
-    @GetMapping("/metrics")
+    @GetMapping("/swagger")
     public List<MetricsResponse> getMetrics(){
         return prometheusService.getAllMetrics().entrySet().stream()
                 .map(e -> metricsMapper.mapOpenApiToMetricsResponse(e.getKey(), e.getValue()))

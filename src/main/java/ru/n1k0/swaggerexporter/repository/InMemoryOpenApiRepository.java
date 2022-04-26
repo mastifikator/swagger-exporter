@@ -21,6 +21,11 @@ public class InMemoryOpenApiRepository implements OpenApiRepository{
     }
 
     @Override
+    public void clear() {
+        openAPIMap.clear();
+    }
+
+    @Override
     public OpenAPI findByService(String serviceName) {
         return openAPIMap.get(serviceName);
     }

@@ -1,9 +1,6 @@
 package ru.n1k0.swaggerexporter.schedule;
 
-import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Metrics;
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.swagger.parser.OpenAPIParser;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.core.models.SwaggerParseResult;
@@ -13,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import ru.n1k0.swaggerexporter.config.ConnectionSettings;
 import ru.n1k0.swaggerexporter.repository.OpenApiRepository;
-import ru.n1k0.swaggerexporter.service.BeerService;
+import ru.n1k0.swaggerexporter.service.PrometheusMetricService;
 
 import java.util.Map;
 
@@ -22,27 +19,33 @@ import java.util.Map;
 public class ScheduledSwaggerPuller {
 
     @Autowired
-    OpenApiRepository openApiRepository;
+    private OpenApiRepository openApiRepository;
 
     @Autowired
-    ConnectionSettings connectionSettings;
+    private ConnectionSettings connectionSettings;
 
     @Autowired
-    BeerService beerService;
+    private PrometheusMetricService prometheusMetricService;
+
+    @Autowired
+    private MeterRegistry meterRegistry;
 
     @Scheduled(initialDelay = 2000, fixedRateString = "${connection.scrapeInterval}")
     public void schedulePullSwaggerDocs(){
         Map<String, String> swaggerAddresses = connectionSettings.getSwaggerAddresses();
 
         for (Map.Entry<String, String> entry: swaggerAddresses.entrySet()) {
-            SwaggerParseResult result = new OpenAPIParser().readLocation(entry.getValue(), null, null);
-            OpenAPI openAPI = result.getOpenAPI();
+            try {
+                SwaggerParseResult result = new OpenAPIParser().readLocation(entry.getValue(), null, null);
+                OpenAPI openAPI = result.getOpenAPI();
 
-            openApiRepository.save(entry.getKey(), openAPI);
-
-            beerService.orderBeer();
-
-            System.out.println("saved " + entry.getKey() + " " + openAPI.getInfo().getVersion());
+                openApiRepository.save(entry.getKey(), openAPI);
+//                meterRegistry.get("swagger_service_info").counter().increment(1);
+            }catch (Exception ex){
+//                meterRegistry.get("swagger_service_info").counter().increment(-1);
+            }
         }
+
+        prometheusMetricService.createServiceCounters();
     }
 }
