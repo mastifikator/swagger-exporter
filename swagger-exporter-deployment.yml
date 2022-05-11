@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tvh-swagger-exporter
+  namespace: load-tvh-inside
+  labels:
+    app: tvh-swagger-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tvh-swagger-exporter
+  template:
+    metadata:
+      labels:
+        app: tvh-swagger-exporter
+    spec:
+      containers:
+        - name: tvh-swagger-exporter
+          image: swaggerexporter
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              cpu: 100m
+              memory: 4Gi

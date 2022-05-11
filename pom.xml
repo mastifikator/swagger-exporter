@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.n1k0</groupId>
     <artifactId>swagger-exporter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>swagger-exporter</name>
     <description>swagger-exporter</description>
     <properties>
