@@ -3,9 +3,13 @@ include:
     ref: v5
     file: '/entrypoints/app/java_base_auto_push.yml'
 
-
 variables:
   WRK_IMG_NODE_BUILD: registry.services.mts.ru/docker/java:15-jdk-buster
   DEBUG: 'true'
   WRK_CPU_LIMIT_BUILD: 1
   WRK_MAX_PROCESS_BUILD: 1
+
+  build app:
+    artifacts:
+      paths:
+        - target/
