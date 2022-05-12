@@ -7,6 +7,8 @@ include:
 variables:
   WRK_IMG_NODE_BUILD: registry.services.mts.ru/docker/java:15-jdk-buster
   DEBUG: 'true'
+  WRK_MEMORY_LIMIT_KUSTOMIZE: 1600Mi
+  WRK_CPU_LIMIT_KUSTOMIZE: 2000m
 
 build app:
   artifacts:
