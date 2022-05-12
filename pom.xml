@@ -8,15 +8,19 @@
         <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>ru.n1k0</groupId>
     <artifactId>swagger-exporter</artifactId>
     <version>1.0.0</version>
     <name>swagger-exporter</name>
     <description>swagger-exporter</description>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -69,6 +73,8 @@
 
     </dependencies>
 
+    <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -76,6 +82,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <finalName>swagger-exporter</finalName>
     </build>
 
 </project>
