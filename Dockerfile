@@ -1,7 +1,7 @@
 FROM registry.services.mts.ru/docker/java:15-jdk-buster
 
 ARG SERVICE_NAME='swagger-exporter'
-ARG ARTIFACTS_PATH='target'
+ARG ARTIFACTS_PATH='./target'
 ARG CONFIG_PATH='./src/main/resources/application.properties'
 ARG ADDITIONAL_CONFIG_PATH='./config/application.yaml'
 ARG RUNTIME_OPTIONS='-XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0'
