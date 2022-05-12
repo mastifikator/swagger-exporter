@@ -9,8 +9,3 @@ variables:
   DEBUG: 'true'
   WRK_CPU_LIMIT_BUILD: 1
   WRK_MAX_PROCESS_BUILD: 1
-
-build app:
-  artifacts:
-    paths:
-      - target/
