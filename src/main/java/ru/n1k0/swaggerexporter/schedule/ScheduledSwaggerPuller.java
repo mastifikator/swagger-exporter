@@ -44,7 +44,7 @@ public class ScheduledSwaggerPuller {
         Map<String, String> swaggerAddresses = connectionSettings.getSwaggerAddresses();
 
         for (Map.Entry<String, String> entry: swaggerAddresses.entrySet()){
-                SwaggerParseResult result = new OpenAPIParser().readLocation(entry.getValue(), null, null);
+            SwaggerParseResult result = new OpenAPIParser().readLocation(entry.getValue(), null, null);
                 List<String> connectStatusList = statusRepository.findByService(entry.getKey());
 
                 if(result.getOpenAPI() != null){
