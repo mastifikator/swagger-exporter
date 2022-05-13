@@ -1,10 +1,7 @@
 FROM registry.services.mts.ru/docker/java:15-jdk-buster
 
-ARG SERVICE_NAME='swagger-exporter'
-ARG ADDITIONAL_CONFIG_PATH='./config/application.yaml'
-
-ENV SERVICE_NAME=${SERVICE_NAME}
-ENV ADDITIONAL_CONFIG_PATH=${ADDITIONAL_CONFIG_PATH}
+ENV SERVICE_NAME='swagger-exporter'
+ENV ADDITIONAL_CONFIG_PATH='./config/application.yaml'
 ENV JAVA_OPTS='-XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0'
 
 COPY target/${SERVICE_NAME}.jar /application/${SERVICE_NAME}.jar
