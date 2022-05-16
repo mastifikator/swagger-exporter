@@ -49,6 +49,7 @@ public class ScheduledSwaggerPuller {
 
                 if(result.getOpenAPI() != null){
                     OpenAPI openAPI = result.getOpenAPI();
+                    System.out.println("Get info from " + entry.getKey());
 
                     Gauge gauge = Gauge.builder("swagger_service_info", connectStatusList, List::size)
                             .tag("service_name", entry.getKey())
