@@ -39,7 +39,7 @@ public class ScheduledSwaggerPuller {
         }
     }
 
-    @Scheduled(initialDelay = 2000, fixedRateString = "${connection.scrapeInterval}")
+    @Scheduled(initialDelay = 2000, fixedRateString = "5000")
     public void schedulePullSwaggerDocs(){
         Map<String, String> swaggerAddresses = connectionSettings.getSwaggerAddresses();
 
