@@ -64,7 +64,7 @@ public class ScheduledSwaggerPuller {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 SwaggerParseResult result = new OpenAPIParser().readLocation(entry.getValue(), null, null);
                 OpenAPI openAPI = result.getOpenAPI();
-                System.out.println("Get info from " + entry.getKey());
+                System.out.println("Get info from " + entry.getKey() + " " + entry.getValue());
 
                 Gauge gauge = Gauge.builder("swagger_service_info", connectStatusList, List::size)
                         .tag("service_name", entry.getKey())
@@ -79,7 +79,7 @@ public class ScheduledSwaggerPuller {
                     connectStatusList.add("connect");
                 }
             } else {
-                System.out.println("Failed get info from " + entry.getKey());
+                System.out.println("Failed get info from " + entry.getKey() + " " + entry.getValue());
 
                 Gauge.builder("swagger_service_info", connectStatusList, List::size)
                         .tag("service_name", entry.getKey())
